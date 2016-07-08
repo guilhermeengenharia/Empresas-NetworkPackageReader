@@ -14,15 +14,8 @@ namespace NPRClient.ValueObject
         public string TCP_Origem {get;set;}
         public string IP_Destino {get;set;}
         public string TCP_Destino {get;set;}
-        public string MensagemProcolo { get; set; }
-        public Free.iso8583.MessageParser Parse_ISO8583 { get; private set; }
-
-        public bool TryParse(byte[] pMensagem)
-        {
-            Parse_ISO8583 = new Free.iso8583.MessageParser(pMensagem);          
-
-            return (Parse_ISO8583.BitMap.Length > 0);
-        }
+            
+        public MensagemISO8583 MensagemProcolo { get; set; }       
         public override string ToString()
         {
             StringBuilder concatenacao = new StringBuilder();
@@ -37,13 +30,15 @@ namespace NPRClient.ValueObject
             concatenacao.Append("|");
             concatenacao.Append(TCP_Destino);
             concatenacao.Append("|");
-            concatenacao.Append(MensagemProcolo);
+            concatenacao.Append(MensagemProcolo.ToString());
 
             return concatenacao.ToString();
         }
 
         public string ToTrasactSQL()
         {
+
+            
             StringBuilder concatenacao = new StringBuilder();
 
             concatenacao.Append("INSERT INTO public.TB_MONITORAMENTO_GLOBAL_PAYMENTS ");
@@ -76,7 +71,7 @@ namespace NPRClient.ValueObject
             concatenacao.Append("," + Environment.NewLine);
             concatenacao.Append("'" + Time.ToString("yyyy-MM-dd hh:mm:ss") + "'");
             concatenacao.Append("," + Environment.NewLine);
-            concatenacao.Append("'" + MensagemProcolo.Replace("'","''") + "'");
+            concatenacao.Append("'" + MensagemProcolo.ToString().Replace("'","''") + "'");
             concatenacao.Append(");" + Environment.NewLine);
 
             return concatenacao.ToString();

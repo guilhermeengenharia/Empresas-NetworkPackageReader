@@ -92,7 +92,7 @@ namespace NPRClient.Monitoramento
                             item.TCP_Destino = tcp.SourcePort.ToString();
                             item.IP_Destino = ip.Destination.ToString();
                             item.TCP_Destino = tcp.DestinationPort.ToString();
-                            item.MensagemProcolo = mensagem;
+                            item.MensagemProcolo = Conversor.ConverterMesangemParaVO(mensagem) as MensagemISO8583;
 
                             Coletagem.Add(item);
                         //}

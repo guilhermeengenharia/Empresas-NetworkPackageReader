@@ -112,13 +112,13 @@ namespace NPRClient.Repositorio
                 TuplaStreamBase.SetTimestamp(Field_DT_MONITORAMENTO, DT_MONITORAMENTO);
 
 
-                if (itemMonitoramento.MensagemProcolo.Length < 900)
+                if (itemMonitoramento.MensagemProcolo.ToString().Length < 900)
                 {
-                    TuplaStreamBase.SetString(Field_DS_MENSAGEM_PROTOCOLO, itemMonitoramento.MensagemProcolo);
+                    TuplaStreamBase.SetString(Field_DS_MENSAGEM_PROTOCOLO, itemMonitoramento.MensagemProcolo.ToString());
                 }
                 else
                 {
-                    TuplaStreamBase.SetString(Field_DS_MENSAGEM_PROTOCOLO, itemMonitoramento.MensagemProcolo.Substring(0, 900));
+                    TuplaStreamBase.SetString(Field_DS_MENSAGEM_PROTOCOLO, itemMonitoramento.MensagemProcolo.ToString().Substring(0, 900));
                 }
 
 

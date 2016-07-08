@@ -1,12 +1,8 @@
-﻿using NPRClient.ENUN;
+﻿using NPRClient.Conversores;
+using NPRClient.ENUN;
 using NPRClient.Monitoramento;
 using NPRClient.Repositorio;
 using NPRClient.ValueObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NPRClient.Factoty
 {
@@ -62,6 +58,12 @@ namespace NPRClient.Factoty
                 case (TipoValueObject.ProtocoloTCP_ISO8583):
                     instancia = new ProtocoloTCP_ISO8583();
                     break;
+                case (TipoValueObject.Mensagem_ISO8583):
+                    instancia = new MensagemISO8583();
+                    break;
+                case (TipoValueObject.ItemMensagem_ISO8583):
+                    instancia = new ItemMensagemISO8583();
+                    break;
                 default:
                     instancia = null;
                     break;
@@ -86,6 +88,23 @@ namespace NPRClient.Factoty
                     instancia = null;
                     break;
 
+            }
+            return instancia;
+        }
+
+
+        public NPRClient.Conversores.IConversor GerarInstanciaConversor (TipoConversor pTipoConversor)
+        {
+            NPRClient.Conversores.IConversor instancia = null;
+
+            switch (pTipoConversor)
+            {
+                case (TipoConversor.Conversor_ISO8583):
+                    instancia = new NPRClient.Conversores.ConversorIso8583();
+                    break;                
+                default:
+                    instancia = null;
+                    break;
             }
             return instancia;
         }

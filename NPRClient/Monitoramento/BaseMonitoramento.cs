@@ -1,4 +1,5 @@
-﻿using NPRClient.Repositorio;
+﻿using NPRClient.Conversores;
+using NPRClient.Repositorio;
 using PcapDotNet.Core;
 using PcapDotNet.Packets;
 using System;
@@ -22,6 +23,7 @@ namespace NPRClient.Monitoramento
 
         public Factoty.Factory Fabrica { get;  set; }
         public IRepositorio Repositorio { get;  set; }
+        public IConversor Conversor { get; set; }
 
         public NPRClient.ENUN.TipoRepositorio tRepositorio { get; private set; }
 
@@ -56,6 +58,7 @@ namespace NPRClient.Monitoramento
             CalcularFimProcessamento();
             GerarFabricaInstancia();
             GerarRepositorio();
+            GerarConversor();
         }
         
         protected virtual void CapturarPacote(Packet packet)
@@ -86,6 +89,11 @@ namespace NPRClient.Monitoramento
             Repositorio = Fabrica.GerarInstanciaRepositorio(tRepositorio);
 
             Repositorio.GerarAptadorArmazenamentoPorSingleton();
+        }
+
+        private void GerarConversor()
+        {
+            Conversor = Fabrica.GerarInstanciaConversor(ENUN.TipoConversor.Conversor_ISO8583);
         }
 
         private  void DestruirInstancias()

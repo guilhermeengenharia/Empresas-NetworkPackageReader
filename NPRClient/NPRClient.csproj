@@ -80,6 +80,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conversores\ConversorIso8583.cs" />
+    <Compile Include="Conversores\IConversor.cs" />
     <Compile Include="ENUN\Enumeradores.cs" />
     <Compile Include="Factoty\Factory.cs" />
     <Compile Include="Monitoramento\BaseMonitoramento.cs" />
@@ -95,6 +97,8 @@
     <Compile Include="Repositorio\StreamBaseArmazenamento.cs" />
     <Compile Include="Repositorio\Vertica.cs" />
     <Compile Include="ValueObject\IValueObject.cs" />
+    <Compile Include="ValueObject\ItemMensagemISO8583.cs" />
+    <Compile Include="ValueObject\MensagemISO8583.cs" />
     <Compile Include="ValueObject\ProtocoloTCP_ISO8583.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,7 +108,9 @@
     <None Include="packages.config" />
     <None Include="Resultado_Wireshark_Getnet_00001_20130301130239.cap" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Mapeamento\ISO8583.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
