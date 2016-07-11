@@ -44,6 +44,10 @@
     <Reference Include="MSBuild.Community.Tasks">
       <HintPath>..\packages\OpenIso8583.Net.0.5.2\lib\MSBuild.Community.Tasks.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="OpenIso8583Net">
       <HintPath>..\packages\OpenIso8583.Net.0.5.2\lib\OpenIso8583Net.dll</HintPath>
     </Reference>
