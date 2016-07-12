@@ -89,6 +89,7 @@ namespace NPRClient.Monitoramento
                         //{
                             item.ID = Guid.NewGuid();
                             item.Time = packet.Timestamp;
+                            item.DataMonitoramento = DateTime.Now;
                             item.IP_Origem = ip.Source.ToString();
                             item.TCP_Destino = tcp.SourcePort.ToString();
                             item.IP_Destino = ip.Destination.ToString();

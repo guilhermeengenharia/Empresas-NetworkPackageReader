@@ -24,6 +24,8 @@ namespace NPRClient.Conversores
 
             DecodificarMensagem();
 
+            MensagemProtocolo.SetRestrigirLimitacaoArmazenamento(900);
+
             return MensagemProtocolo;
         }
 

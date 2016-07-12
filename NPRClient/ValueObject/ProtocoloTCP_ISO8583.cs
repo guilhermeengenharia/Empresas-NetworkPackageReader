@@ -11,6 +11,7 @@ namespace NPRClient.ValueObject
 
         public Guid ID { get; set; }
         public DateTime Time {get;set;}
+        public DateTime DataMonitoramento { get; set; }
         public string IP_Origem {get;set;}
         public string TCP_Origem {get;set;}
         public string IP_Destino {get;set;}

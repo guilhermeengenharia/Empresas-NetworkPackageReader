@@ -26,6 +26,14 @@ namespace NPRClient.ValueObject
             MensagemProcolo = pMensagem;
         }
 
+        public void SetRestrigirLimitacaoArmazenamento(int pLimitador)
+        {
+            if (MensagemProcolo.ToString().Length > pLimitador)
+            {
+                MensagemProcolo = MensagemProcolo.ToString().Substring(0, pLimitador);
+            }
+           
+        }
         public void SetAtributoMensagem(ItemMensagemISO8583 pItemMensagem)
         {
             if (AtributosMensagem == null) AtributosMensagem = new List<ItemMensagemISO8583>();
