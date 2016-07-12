@@ -99,6 +99,7 @@
     <Compile Include="Repositorio\ArquivoTexto.cs" />
     <Compile Include="Repositorio\IRepositorio.cs" />
     <Compile Include="Repositorio\StreamBaseArmazenamento.cs" />
+    <Compile Include="Repositorio\StreamBaseForJSon.cs" />
     <Compile Include="Repositorio\Vertica.cs" />
     <Compile Include="ValueObject\IValueObject.cs" />
     <Compile Include="ValueObject\ItemMensagemISO8583.cs" />

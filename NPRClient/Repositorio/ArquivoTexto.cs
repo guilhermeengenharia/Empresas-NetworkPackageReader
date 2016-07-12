@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -21,7 +22,7 @@ namespace NPRClient.Repositorio
 
                 foreach (ValueObject.IValueObject item in pListaVO)
                 {
-                    ConteudoArquivo = item.ToString();
+                    ConteudoArquivo = JsonConvert.SerializeObject(item);
                     ConteudoArquivo += Environment.NewLine;
                 }
 

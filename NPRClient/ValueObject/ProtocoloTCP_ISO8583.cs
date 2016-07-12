@@ -9,6 +9,7 @@ namespace NPRClient.ValueObject
     public class ProtocoloTCP_ISO8583 : IValueObject
     {
 
+        public Guid ID { get; set; }
         public DateTime Time {get;set;}
         public string IP_Origem {get;set;}
         public string TCP_Origem {get;set;}

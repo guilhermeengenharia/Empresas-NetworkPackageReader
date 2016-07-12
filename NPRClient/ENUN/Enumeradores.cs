@@ -16,7 +16,8 @@ namespace NPRClient.ENUN
     {
         ArquivoTexto,
         Vertica,
-        StreamBase
+        StreamBase,
+        StreamBaseForJSon
     }
 
     public enum TipoValueObject
@@ -105,6 +106,8 @@ namespace NPRClient.ENUN
         Reserved_Private_P3,
         Message_Authentication_Code_MAC,
         BitMap_Binario,
+        BitMap,
+        Outros,
 
     }
 

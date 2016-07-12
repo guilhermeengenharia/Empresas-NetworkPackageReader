@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using NPRClient.ValueObject;
 using NPRClient.ENUN;
+using System.Xml;
 
 namespace NPRClient.Conversores
 {
     public class ConversorIso8583 : IConversor
     {
 
-        private List<TipoAtributoIso8583> ListaTipoAtributos { get; set; }
+        private List<int> ListaTipoAtributos { get; set; }
         private MensagemISO8583 MensagemProtocolo { get; set; }
 
         public IValueObject ConverterMesangemParaVO(string pMensagem)
@@ -43,7 +44,7 @@ namespace NPRClient.Conversores
 
             MensagemProtocolo.SetAtributoMensagem(new ItemMensagemISO8583() { TipoAtributo = TipoAtributoIso8583.MensageType, Valor = valor });
 
-            return pTamanhoPosicional + 1;
+            return pTamanhoPosicional;
         }
 
         private int GerarBitMap(int pTamanhoPosicional)
@@ -53,7 +54,7 @@ namespace NPRClient.Conversores
             int ValorReferencia = 0;
             int ValorTamanhoBits = 0;
 
-            ValorReferencia = int.Parse(MensagemProtocolo.GetSubValoresMensagemProtocolo(pTamanhoPosicional, 2));
+            ValorReferencia = Convert.ToInt32(MensagemProtocolo.GetSubValoresMensagemProtocolo(pTamanhoPosicional, 2),16);
 
             ValorBinario = Convert.ToString(ValorReferencia, 2);
 
@@ -61,11 +62,11 @@ namespace NPRClient.Conversores
 
             ValorBinario = string.Empty;
 
-            for (int i = 0; i < (ValorTamanhoBits / 4); i += 2)
+            for (int i = 0; i < ((ValorTamanhoBits / 4) -1); i += 2)
             {
-                ValorReferencia = int.Parse(MensagemProtocolo.GetSubValoresMensagemProtocolo((pTamanhoPosicional + i), 2));
+                ValorReferencia = Convert.ToInt32(MensagemProtocolo.GetSubValoresMensagemProtocolo((pTamanhoPosicional + i), 2),16);
 
-                ValorBinario += Convert.ToString(ValorReferencia, 2);
+                ValorBinario += Convert.ToString(ValorReferencia, 2).PadLeft(8,'0');
                 
             }
 
@@ -73,7 +74,7 @@ namespace NPRClient.Conversores
 
             MensagemProtocolo.SetAtributoMensagem(new ItemMensagemISO8583() {TipoAtributo = TipoAtributoIso8583.BitMap_Binario, Valor = ValorBinario });
 
-            MensagemProtocolo.SetAtributoMensagem(new ItemMensagemISO8583() { TipoAtributo = TipoAtributoIso8583.BitMap2, Valor = ValorBitMap });
+            MensagemProtocolo.SetAtributoMensagem(new ItemMensagemISO8583() { TipoAtributo = TipoAtributoIso8583.BitMap, Valor = ValorBitMap });
 
             pTamanhoPosicional = pTamanhoPosicional + (ValorTamanhoBits == 128 ? (ValorTamanhoBits / 8) : (ValorTamanhoBits / 4));
 
@@ -84,17 +85,118 @@ namespace NPRClient.Conversores
 
         private void SetListaTipoAtributos(string pBinario,int pTamanhoBits)
         {
-            for (int i = 0; i <= pTamanhoBits; i++)
+            ListaTipoAtributos = new List<int>();
+
+            for (int i = 0; i <= (pTamanhoBits - 1); i++)
             {
                 if (pBinario.Substring(i, 1) == "1")
                 {
-                    ListaTipoAtributos.Add((TipoAtributoIso8583)i);
+                    ListaTipoAtributos.Add((i+1));
                 }
             }
         }
 
         private int GerarAtributos(int pTamanhoPosicional)
         {
+            System.Xml.XmlDocument MapeamentoAtributos = new System.Xml.XmlDocument();
+
+            MapeamentoAtributos.Load(@"Mapeamento/ISO8583.xml");
+
+
+            for(int index = 0; index < ListaTipoAtributos.Count;index++)
+            {
+                XmlNode NodeAtributo = MapeamentoAtributos.SelectSingleNode("/ISO8583/ATRIBUTOS/ATRIBUTO[ID='" + ListaTipoAtributos[index].ToString() + "']");
+                if (NodeAtributo != null)
+                {
+                    try
+                    {
+
+                        int tamanhoAtual = MensagemProtocolo.GetLeghtForPosicionStart(pTamanhoPosicional);
+                        int tamanhoMensagem = int.Parse(NodeAtributo.LastChild.InnerText);
+
+                        string valor = string.Empty;
+
+                        if (tamanhoMensagem < 900)
+                        {
+                            if (tamanhoAtual >= tamanhoMensagem)
+                            {
+                                valor = MensagemProtocolo.GetSubValoresMensagemProtocolo(pTamanhoPosicional, tamanhoMensagem);
+                            }
+                            else
+                            {
+                                valor = string.Empty;
+                            }
+                            
+                            pTamanhoPosicional += tamanhoMensagem;
+                        }
+                        else
+                        {
+                            if ( tamanhoAtual >= (pTamanhoPosicional + (tamanhoMensagem - 900)) )
+                            {
+                                string valorVariavel = MensagemProtocolo.GetSubValoresMensagemProtocolo(pTamanhoPosicional, (tamanhoMensagem - 900));
+                                int tamanhoVariavel = 0;
+
+                                valorVariavel = RetornarApenasNumero(valorVariavel);
+
+                                pTamanhoPosicional += (tamanhoMensagem - 900);
+                                tamanhoVariavel = int.Parse(valorVariavel);
+
+                                if (MensagemProtocolo.GetLeghtForPosicionStart(pTamanhoPosicional) > tamanhoVariavel)
+                                {
+                                    valor = MensagemProtocolo.GetSubValoresMensagemProtocolo(pTamanhoPosicional, tamanhoVariavel);
+                                }
+                                else
+                                {
+                                    tamanhoVariavel = MensagemProtocolo.GetLeghtForPosicionStart(pTamanhoPosicional);
+                                    try
+                                    {
+                                        valor = MensagemProtocolo.GetSubValoresMensagemProtocolo(pTamanhoPosicional, tamanhoVariavel);
+                                    }
+                                    catch
+                                    {
+                                        valor = string.Empty;
+                                    }
+
+                                }
+
+
+                                pTamanhoPosicional += tamanhoVariavel;
+                            }
+                            else
+                            {
+                                valor = string.Empty;
+                            }
+                           
+
+                        }
+
+
+                        MensagemProtocolo.SetAtributoMensagem(new ItemMensagemISO8583() { TipoAtributo = (TipoAtributoIso8583)ListaTipoAtributos[index], Valor = valor });
+                    }
+
+                    catch (Exception ex)
+                    {
+                        throw new Exception(NodeAtributo.InnerText + " ex=" + ex.Message);
+                    }
+                
+                }
+            }
+
+
+            return pTamanhoPosicional;
+
+        }
+
+        private string RetornarApenasNumero(string pValor)
+        {
+            string retorno = string.Join("", System.Text.RegularExpressions.Regex.Split(pValor, @"[^\d]"));
+
+            if (retorno.Length == 0) return "0";
+
+            return retorno;
+
+            //var regex = new System.Text.RegularExpressions.Regex(@"\d+");
+            //return regex.Replace(pValor, "");
 
         }
     }

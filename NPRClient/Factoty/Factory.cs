@@ -42,6 +42,9 @@ namespace NPRClient.Factoty
                 case (TipoRepositorio.StreamBase):
                     instancia = new StreamBaseArmazenamento();
                     break;
+                case (TipoRepositorio.StreamBaseForJSon):
+                    instancia = new StreamBaseForJSon();
+                    break;
                 default:
                     instancia = null;
                     break;

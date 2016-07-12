@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ISO8583>
-  <ATRIBUTOS>
-  
+  <ATRIBUTOS>  
     <ATRIBUTO>
       <ID>1</ID>
       <NOME>BITMAP</NOME>
@@ -202,6 +201,130 @@
       <NOME>Service_Restriction_Code</NOME>
       <TAMANHO>3</TAMANHO>
     </ATRIBUTO>
+     <ATRIBUTO>
+      <ID>41</ID>
+      <NOME>Card_Acceptor_Terminal_Identification</NOME>
+      <TAMANHO>8</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>42</ID>
+      <NOME>Card_Acceptor_Identification_Code</NOME>
+      <TAMANHO>15</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>43</ID>
+      <NOME>Card_Acceptor_Name_Location</NOME>
+      <TAMANHO>40</TAMANHO> 
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>44</ID>
+      <NOME>Additional_Response_Data</NOME>
+      <TAMANHO>902</TAMANHO>
+    </ATRIBUTO>
+   <ATRIBUTO>
+      <ID>45</ID>
+      <NOME>Track_1_Data</NOME>
+      <TAMANHO>902</TAMANHO>
+    </ATRIBUTO>
+   <ATRIBUTO>
+      <ID>46</ID>
+      <NOME>Additional_Data_ISO</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+   <ATRIBUTO>
+      <ID>47</ID>
+      <NOME>Additional_Data_National</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+   <ATRIBUTO>
+      <ID>48</ID>
+      <NOME>Additional_Data_Private</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+   <ATRIBUTO>
+      <ID>49</ID>
+      <NOME>Currency_Code_Transaction</NOME>
+      <TAMANHO>3</TAMANHO>
+    </ATRIBUTO>  
+   <ATRIBUTO>
+      <ID>50</ID>
+      <NOME>Currency_Code_Settlement</NOME>
+      <TAMANHO>3</TAMANHO>
+    </ATRIBUTO> 
+   <ATRIBUTO>
+      <ID>51</ID>
+      <NOME>Currency_Code_Cardholder_Billing</NOME>
+      <TAMANHO>3</TAMANHO>
+    </ATRIBUTO> 
+   <ATRIBUTO>
+      <ID>52</ID>
+      <NOME>Personal_Identificatio_Number_Data</NOME>
+      <TAMANHO>16</TAMANHO>
+    </ATRIBUTO> 
+    <ATRIBUTO>
+      <ID>53</ID>
+      <NOME>Security_Related_Control_Information</NOME>
+      <TAMANHO>18</TAMANHO>
+    </ATRIBUTO>    
+    <ATRIBUTO>
+      <ID>54</ID>
+      <NOME>Additional_Amounts</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>55</ID>
+      <NOME>Reserved_ISO_P1</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>56</ID>
+      <NOME>Reserved_ISO_P2</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>57</ID>
+      <NOME>Reserved_National_P1</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>58</ID>
+      <NOME>Reserved_National_P2</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO> 
+    <ATRIBUTO>
+      <ID>59</ID>
+      <NOME>Reserved_For_National_Use</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>60</ID>
+      <NOME>Advice_Reasocode_Private_Reserved</NOME>
+      <TAMANHO>901</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>61</ID>
+      <NOME>Reserved_Private_P1</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>62</ID>
+      <NOME>Reserved_Private_P2</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>63</ID>
+      <NOME>Reserved_Private_P3</NOME>
+      <TAMANHO>903</TAMANHO>
+    </ATRIBUTO>
+    <ATRIBUTO>
+      <ID>64</ID>
+      <NOME>Message_Authentication_Code_MAC</NOME>
+      <TAMANHO>4</TAMANHO>
+    </ATRIBUTO>
+   <ATRIBUTO>
+      <ID>65</ID>
+      <NOME>BitMap_Binario</NOME>
+      <TAMANHO>200</TAMANHO>
+    </ATRIBUTO>
   </ATRIBUTOS>
-
 </ISO8583>

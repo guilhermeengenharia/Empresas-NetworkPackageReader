@@ -35,7 +35,14 @@ namespace NPRClient.ValueObject
 
         public string GetSubValoresMensagemProtocolo(int pPosicaoInicial, int pPosicaoFinal)
         {
-            return this.MensagemProcolo.Substring(pPosicaoFinal, pPosicaoFinal);
+            return this.MensagemProcolo.Substring(pPosicaoInicial, pPosicaoFinal);
+        }
+
+        public int GetLeghtForPosicionStart(int pPosicaoInicial)
+        {
+            string aux = this.MensagemProcolo.Substring(pPosicaoInicial);
+
+            return aux.Length;
         }
 
     }
