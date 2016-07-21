@@ -10,13 +10,13 @@ namespace NPRClient.Repositorio
     public class StreamBaseForJSon : IRepositorio
     {
 
-        public async void Armazenar(List<IValueObject> pListaVO)
+        public async  void Armazenar(List<IValueObject> pListaVO)
         {
             if (pListaVO != null && pListaVO.Count > 0)
             {
                 string ConteudoStreamBase = "";
 
-                foreach (ValueObject.IValueObject item in pListaVO)
+                foreach (IValueObject item in pListaVO)
                 {
                     ConteudoStreamBase += item.ToString();
                     ConteudoStreamBase += Environment.NewLine;
@@ -30,13 +30,21 @@ namespace NPRClient.Repositorio
 
 
             }
+
+
         }
 
-        
+
         protected void EnviarParaFilaStreamBase(IValueObject item)
         {
             string InputStreamBase = "Input_Sniffer_JSON";//ConfigurationManager.AppSettings["StreamBaseInput"].ToString();
-                                                              //string FieldNameStreamBase = "";//ConfigurationManager.AppSettings["StreamBaseField"].ToString();
+                                                          //string FieldNameStreamBase = "";//ConfigurationManager.AppSettings["StreamBaseField"].ToString();
+
+           
+            Newtonsoft.Json.JsonSerializerSettings FormatDataJson = new Newtonsoft.Json.JsonSerializerSettings
+            {
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.MicrosoftDateFormat
+            };
 
 
             StreamBase.SB.Schema SchemaStreamBase = ApdadorStreamBase.AbrirComunicacao().GetSchemaForStream(InputStreamBase);
@@ -46,18 +54,18 @@ namespace NPRClient.Repositorio
             StreamBase.SB.Schema.Field Field_Sniffer_JSON = SchemaStreamBase.GetField("Sniffer_JSON");
             
             try
-            {
-                TuplaStreamBase.SetString(Field_Sniffer_JSON, Newtonsoft.Json.JsonConvert.SerializeObject(item));
+            {               
+                TuplaStreamBase.SetString(Field_Sniffer_JSON, Newtonsoft.Json.JsonConvert.SerializeObject(item, FormatDataJson));
                
                 ApdadorStreamBase.Enfilerar(InputStreamBase, TuplaStreamBase);
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("StreamBaseForJSon.EnviarParaFilaStreamBase -> " + ex.Message);
             }
             finally
             {
-
+                FormatDataJson = null;
                 TuplaStreamBase = null;
                 SchemaStreamBase = null;
                 Field_Sniffer_JSON = null;                

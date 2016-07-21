@@ -9,5 +9,6 @@ namespace NPRClient.ValueObject
     public interface IValueObject
     {
         string ToTrasactSQL();
+
     }
 }

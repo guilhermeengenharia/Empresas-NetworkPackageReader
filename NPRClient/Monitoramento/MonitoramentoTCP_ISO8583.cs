@@ -55,7 +55,7 @@ namespace NPRClient.Monitoramento
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("MonitoramentoTCP_ISO8583.AbrirComunicacao -> " + ex.Message);
             }
           
                        
@@ -88,8 +88,8 @@ namespace NPRClient.Monitoramento
                         //if (item.TryParse(tcp.Payload.ToArray()))
                         //{
                             item.ID = Guid.NewGuid();
-                            item.Time = packet.Timestamp;
-                            item.DataMonitoramento = DateTime.Now;
+                            item.Time = packet.Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                            item.DataMonitoramento = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
                             item.IP_Origem = ip.Source.ToString();
                             item.TCP_Destino = tcp.SourcePort.ToString();
                             item.IP_Destino = ip.Destination.ToString();
@@ -107,12 +107,12 @@ namespace NPRClient.Monitoramento
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    throw new Exception("MonitoramentoTCP_ISO8583.CapturarPacote -> " + ex.Message);
                 }
                 finally
                 {
                     Coletagem = null;
-                                   }
+                }
             }
             else
             {

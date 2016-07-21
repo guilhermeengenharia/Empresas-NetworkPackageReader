@@ -9,7 +9,9 @@ namespace NPRClient.Conversores
 {
     public interface IConversor
     {
-
+        bool GetConversaoEfetuadaSucesso();
         IValueObject ConverterMesangemParaVO(string pMensagem);
+
+        bool ValidarFormatoConversao(string atributo, int tipoAtributo);
     }
 }

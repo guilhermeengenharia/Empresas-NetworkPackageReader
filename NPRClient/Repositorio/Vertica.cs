@@ -34,7 +34,7 @@ namespace NPRClient.Repositorio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("VerticaRepositorio.Armazenar -> " + ex.Message);
             }
           
         }

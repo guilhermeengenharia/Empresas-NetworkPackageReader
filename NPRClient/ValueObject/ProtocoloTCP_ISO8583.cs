@@ -10,8 +10,10 @@ namespace NPRClient.ValueObject
     {
 
         public Guid ID { get; set; }
-        public DateTime Time {get;set;}
-        public DateTime DataMonitoramento { get; set; }
+
+        
+        public string Time {get;set;}
+        public string DataMonitoramento { get; set; }
         public string IP_Origem {get;set;}
         public string TCP_Origem {get;set;}
         public string IP_Destino {get;set;}
@@ -71,7 +73,7 @@ namespace NPRClient.ValueObject
             concatenacao.Append("," + Environment.NewLine);
             concatenacao.Append("'" + TCP_Destino + "'");
             concatenacao.Append("," + Environment.NewLine);
-            concatenacao.Append("'" + Time.ToString("yyyy-MM-dd hh:mm:ss") + "'");
+            concatenacao.Append("'" + Time + "'");
             concatenacao.Append("," + Environment.NewLine);
             concatenacao.Append("'" + MensagemProcolo.ToString().Replace("'","''") + "'");
             concatenacao.Append(");" + Environment.NewLine);

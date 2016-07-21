@@ -11,6 +11,7 @@ namespace NPRClient.ValueObject
     {
 
         public ENUN.TipoAtributoIso8583 TipoAtributo { get; set; }
+        public string Descricao { get; set; }
 
         public string Valor { get; set; }
 

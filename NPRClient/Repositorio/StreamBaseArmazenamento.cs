@@ -64,7 +64,7 @@ namespace NPRClient.Repositorio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("StreamBaseArmazenamento.EnviarParaFilaStreamBaseTeste -> " + ex.Message);
             }
             finally
             {
@@ -126,7 +126,7 @@ namespace NPRClient.Repositorio
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("StreamBaseArmazenamento.EnviarParaFilaStreamBase -> " + ex.Message);
             }
             finally
             {

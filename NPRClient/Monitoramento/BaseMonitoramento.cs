@@ -44,7 +44,7 @@ namespace NPRClient.Monitoramento
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("BaseMonitoramento.Monitorar -> " + ex.Message);
             }
             finally
             {

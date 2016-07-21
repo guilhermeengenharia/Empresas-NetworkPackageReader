@@ -107,8 +107,10 @@ namespace NPRClient.ENUN
         Message_Authentication_Code_MAC,
         BitMap_Binario,
         BitMap,
+        Card_Acceptor_Country_Location,
+        Card_Acceptor_State_Location,
         Outros,
-
+        Erro_Conversao
     }
 
    

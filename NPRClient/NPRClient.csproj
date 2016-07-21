@@ -114,7 +114,10 @@
     <None Include="Resultado_Wireshark_Getnet_00001_20130301130239.cap" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mapeamento\ISO8583.xml" />
+    <Content Include="Instalacoes.txt" />
+    <Content Include="Mapeamento\ISO8583.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TabelasVertica.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

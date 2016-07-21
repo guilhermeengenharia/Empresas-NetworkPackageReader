@@ -1,0 +1,9 @@
+﻿Instalação Sniffer
+
+- FrameWork 4.5
+- PCAP
+- WireShark
+- Definir Usuário Generico para o WindowsService do Sniffer ?
+- Intalar o JDK do Java
+- StreamBase 64bits
+- Copia do arquivo Vertica.jar, para a pasta do Adapter
